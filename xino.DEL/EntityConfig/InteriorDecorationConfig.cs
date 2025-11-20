@@ -13,5 +13,14 @@ public class InteriorDecorationConfig : IEntityTypeConfiguration<InteriorDecorat
         builder.Property(x => x.HeaderImage).IsRequired();
         builder.Property(c => c.Address).IsRequired(false);
         builder.Property(x => x.Slug).IsRequired().HasMaxLength(25);
+
+        builder.Property(x => x.Slug)
+       .IsRequired()
+       .HasMaxLength(300)
+       .HasColumnType("varchar(300)")
+       .IsUnicode(false);
+
+        builder.HasIndex(x => x.Slug).IsUnique();
+        builder.HasIndex(x => new { x.IsDeleted, x.BuildDate });
     }
 }

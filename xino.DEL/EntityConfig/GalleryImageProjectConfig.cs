@@ -10,6 +10,8 @@ public class GalleryImageProjectConfig : IEntityTypeConfiguration<GalleryImagePr
     public void Configure(EntityTypeBuilder<GalleryImageProject> builder)
     {
         builder.HasOne(x => x.Project).WithMany(x => x.GalleryImageProject).HasForeignKey(x => x.ProjectId);
+
+        builder.HasIndex(x => new { x.ProjectId, x.Order });
     }
 }
 

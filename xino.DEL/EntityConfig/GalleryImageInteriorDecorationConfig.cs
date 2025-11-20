@@ -10,6 +10,7 @@ class GalleryImageInteriorDecorationConfig : IEntityTypeConfiguration<GalleryIma
     public void Configure(EntityTypeBuilder<GalleryImageInteriorDecoration> builder)
     {
         builder.HasOne(x => x.InteriorDecoration).WithMany(x => x.GalleryImageInteriorDecoration).HasForeignKey(x => x.InteriorDecorationId);
+
     }
 }
 

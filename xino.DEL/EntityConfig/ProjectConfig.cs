@@ -12,13 +12,23 @@ public class ProjectConfig : IEntityTypeConfiguration<Project>
     {
         builder.Property(x => x.BuildDate).HasDefaultValueSql("GETDATE()");
         builder.Property(x => x.IsDeleted).HasDefaultValue(false);
-        builder.Property(x => x.Slug).IsRequired().HasMaxLength(25);
+        builder.Property(x => x.Slug).IsRequired().HasMaxLength(200);
         builder.Property(x => x.HeaderImage).IsRequired();
         builder.Property(x => x.ProjectSize).IsRequired().HasMaxLength(125);
         builder.Property(x => x.YearProject).IsRequired();
         builder.Property(x => x.StyleProject).IsRequired();
         builder.Property(x => x.ExhibitionProject).IsRequired();
-        
+
+        builder.Property(x => x.Slug)
+       .IsRequired()
+       .HasMaxLength(300)
+       .HasColumnType("varchar(300)")
+       .IsUnicode(false);
+
+        builder.HasIndex(x => x.Slug).IsUnique();
+        builder.HasIndex(x => new { x.IsDeleted, x.BuildDate });  
+        builder.HasIndex(x => x.YearProject);
+
     }
 }
 

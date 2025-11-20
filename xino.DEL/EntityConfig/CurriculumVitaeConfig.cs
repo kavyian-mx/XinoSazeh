@@ -20,6 +20,9 @@ public class CurriculumVitaeConfig : IEntityTypeConfiguration<CurriculumVitae>
         builder.Property(x => x.File).IsRequired();
         builder.Property(x => x.Text).IsRequired().HasMaxLength(500);
 
+        builder.HasIndex(x => new { x.IsChacket, x.BuildDate });
+        builder.HasIndex(x => x.PhoneNumber).IsUnique();
+
     }
 }
 

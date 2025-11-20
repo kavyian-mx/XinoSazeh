@@ -18,6 +18,8 @@ public class AdminConfig : IEntityTypeConfiguration<Admin>
         builder.Property(x => x.IsSuperAdmin)
        .HasDefaultValue(false);
 
+        builder.HasIndex(x => x.Name).IsUnique();
+
     }
 }
 

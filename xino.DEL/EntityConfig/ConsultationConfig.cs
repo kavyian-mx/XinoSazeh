@@ -22,6 +22,9 @@ public class ConsultationConfig : IEntityTypeConfiguration<Consultation>
         builder.Property(x => x.TextExhibition).IsRequired().HasMaxLength(300);
         builder.Property(x => x.Meterage).IsRequired();
 
+        builder.HasIndex(x => new { x.IsChacket, x.BuildDate });
+        builder.HasIndex(x => x.PhoneNumber); 
+
     }
 }
 
