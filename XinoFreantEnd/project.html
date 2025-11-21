@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ژینوسازه — غرفه سازی حرفه‌ای و نمونه‌کارها</title>
+  <meta name="description" content="راهنمای کامل غرفه سازی + نمونه‌کارهای لوکس ژینوسازه: نفت، خودرو، فناوری و بیشتر." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0f15;
+      --card: #0e141b;
+      --accent: #0f4c75;
+      --accent-light: #1e6fa0;
+      --gold: #d4af37;
+      --glass: rgba(15,30,50,0.4);
+      --glass-border: rgba(30,111,160,0.3);
+      --text: #e8f1f8;
+      --text-muted: #94b0c9;
+      --radius: 32px;
+      --transition: all 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    @font-face {font-family:'Vazir';src:url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Light.woff2') format('woff2');font-weight:300;font-display:swap;}
+    @font-face {font-family:'Vazir';src:url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Medium.woff2') format('woff2');font-weight:500;font-display:swap;}
+    @font-face {font-family:'Vazir';src:url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+
+    * {box-sizing:border-box;margin:0;padding:0;}
+    body,html {height:100%;background:var(--bg);color:var(--text);font-family:'Vazir',sans-serif;overflow-x:hidden;}
+    a {color:inherit;text-decoration:none;}
+
+    /* منوی شناور و سایدمنو */
+    #menuBtn {position:fixed;right:32px;bottom:32px;z-index:9999;width:72px;height:72px;border-radius:50%;background:var(--accent);border:2px solid var(--glass-border);color:#fff;font-size:30px;box-shadow:0 20px 60px rgba(15,76,117,0.7);backdrop-filter:blur(16px);transition:var(--transition);cursor:pointer;display:grid;place-items:center;}
+    #menuBtn:hover {transform:scale(1.18) rotate(90deg);background:var(--gold);box-shadow:0 30px 80px rgba(212,175,55,0.6);}
+    #sideMenu {position:fixed;top:0;right:-480px;width:480px;max-width:94vw;height:100%;background:rgba(10,15,21,0.96);backdrop-filter:blur(32px);border-left:1px solid rgba(212,175,55,0.15);box-shadow:-60px 0 140px rgba(0,0,0,0.9);z-index:9998;padding:60px 45px;transition:var(--transition);overflow-y:auto;}
+    #sideMenu.open {right:0;}
+    .menu-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:70px;}
+    .menu-logo {font-size:38px;font-weight:900;background:linear-gradient(90deg,#fff,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    #closeMenu {width:60px;height:60px;border-radius:50%;background:transparent;border:2px solid rgba(255,255,255,0.2);color:#fff;font-size:32px;cursor:pointer;display:grid;place-items:center;transition:var(--transition);}
+    #closeMenu:hover {border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,0.1);}
+    .menu-item {display:block;padding:22px 28px;margin:12px 0;border-radius:18px;font-size:20px;font-weight:600;color:var(--text-muted);transition:var(--transition);position:relative;overflow:hidden;cursor:pointer;}
+    .menu-item:hover {color:#fff;background:rgba(255,255,255,0.04);padding-right:40px;border-right:4px solid var(--gold);}
+    #overlay {position:fixed;inset:0;background:rgba(0,0,0,0.8);opacity:0;pointer-events:none;transition:opacity 0.6s;z-index:9997;}
+    #overlay.show {opacity:1;pointer-events:auto;}
+
+    /* هیرو */
+    .hero {min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:0 20px;}
+    .hero::before {content:'';position:absolute;inset:0;background:url('./assets/Image/bg.png') center/cover no-repeat;filter:brightness(0.38);}
+    .hero-content {position:relative;z-index:2;max-width:1100px;}
+    .hero h1 {font-size:clamp(60px,9vw,110px);font-weight:900;line-height:1.1;background:linear-gradient(90deg,#ffffff,#d4af37,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;}
+    .hero p {font-size:24px;color:#b8d4ed;max-width:800px;margin:0 auto 50px auto;font-weight:300;line-height:1.8;}
+    .hero-buttons {display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+    .btn-hero {padding:22px 56px;border-radius:60px;font-weight:700;font-size:21px;transition:var(--transition);cursor:pointer;min-width:240px;}
+    .btn-primary {background:linear-gradient(90deg,var(--accent),var(--accent-light));color:#fff;border:none;box-shadow:0 20px 60px rgba(15,76,117,0.8);}
+    .btn-primary:hover {transform:translateY(-14px);box-shadow:0 40px 90px rgba(15,76,117,1);}
+    .btn-outline {background:transparent;border:2.5px solid var(--gold);color:var(--gold);}
+    .btn-outline:hover {background:var(--gold);color:#000;transform:translateY(-14px);}
+
+    /* بخش نکات غرفه سازی */
+    .tips-section {padding:180px 0 220px;background:var(--bg);}
+    .container-fluid {max-width:1400px;margin:0 auto;padding:0 20px;}
+    .section-title {font-size:64px;font-weight:900;text-align:center;margin-bottom:120px;background:linear-gradient(90deg,#fff,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .tips-grid {display:grid;grid-template-columns:repeat(auto-fit, minmax(380px,1fr));gap:40px;}
+    .tip-card {background:var(--card);border-radius:var(--radius);padding:50px 40px;border:1px solid var(--glass-border);position:relative;overflow:hidden;transition:var(--transition);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+    .tip-card::before {content:attr(data-number);position:absolute;top:-30px;right:-30px;font-size:180px;font-weight:900;opacity:0.07;color:var(--gold);font-family:'Vazir';pointer-events:none;}
+    .tip-number {width:80px;height:80px;background:var(--gold);color:#000;border-radius:50%;display:grid;place-items:center;font-size:36px;font-weight:900;margin:0 auto 30px;border:4px solid rgba(0,0,0,0.3);}
+    .tip-card h3 {font-size:28px;font-weight:800;color:var(--text);margin-bottom:20px;}
+    .tip-card p {font-size:18px;color:var(--text-muted);line-height:1.8;}
+    .tip-card:hover {transform:translateY(-30px);box-shadow:0 60px 140px rgba(212,175,55,0.25);border-color:var(--gold);}
+
+    /* بخش نمونه‌کارها با فیلتر */
+    .projects-section {padding:180px 0;background:linear-gradient(180deg, var(--bg), #0c1117);}
+    .filters {display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:80px;text-align:center;}
+    .filter-btn {padding:12px 28px;background:transparent;border:2px solid transparent;color:var(--text-muted);border-radius:30px;font-weight:600;transition:var(--transition);cursor:pointer;font-size:16px;}
+    .filter-btn.active {border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,0.1);}
+    .filter-btn:hover {border-color:var(--accent);color:var(--accent);}
+    .projects-grid {display:grid;grid-template-columns:repeat(auto-fit, minmax(380px,1fr));gap:40px;}
+    .project-card {position:relative;height:520px;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--glass-border);cursor:pointer;transition:var(--transition);box-shadow:0 20px 60px rgba(0,0,0,0.7);}
+    .project-card img {width:100%;height:100%;object-fit:cover;transition:var(--transition);}
+    .project-overlay {position:absolute;inset:0;background:linear-gradient(0deg,var(--accent) 0%,transparent 40%);display:flex;align-items:end;padding:52px;opacity:0;transition:var(--transition);}
+    .project-title {font-size:32px;font-weight:800;color:#fff;text-shadow:0 4px 20px #000;}
+    .project-subtitle {font-size:19px;color:#cce5ff;margin-top:10px;}
+    .project-card:hover img {transform:scale(1.22);filter:brightness(0.72);}
+    .project-card:hover .project-overlay {opacity:1;}
+    .project-card:hover {transform:translateY(-35px);box-shadow:0 70px 160px rgba(15,76,117,0.6);border-color:var(--gold);}
+
+    /* کال تو اکشن */
+    .cta-section {padding:160px 0;background:linear-gradient(180deg,#0a0f15,#0f1a24);text-align:center;}
+    .cta-title {font-size:48px;font-weight:900;margin-bottom:30px;background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .cta-text {font-size:22px;color:#b8d4ed;max-width:800px;margin:0 auto 50px;line-height:1.7;}
+    .cta-btn {padding:24px 70px;background:var(--gold);color:#000;border:none;border-radius:60px;font-size:22px;font-weight:900;box-shadow:0 20px 60px rgba(212,175,55,0.4);transition:var(--transition);cursor:pointer;}
+    .cta-btn:hover {transform:translateY(-12px);box-shadow:0 40px 90px rgba(212,175,55,0.7);}
+
+    /* فوتر */
+    footer {background:#080c12;padding:100px 0 60px;border-top:1px solid rgba(212,175,55,0.15);}
+    .footer-grid {display:grid;grid-template-columns:repeat(auto-fit, minmax(280px,1fr));gap:50px;max-width:1200px;margin:0 auto;padding:0 20px;}
+    .footer-logo {font-size:42px;font-weight:900;background:linear-gradient(90deg,#fff,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;}
+    .footer-text {font-size:17px;color:var(--text-muted);line-height:1.8;}
+    .footer-links h4 {font-size:22px;color:var(--gold);margin-bottom:20px;}
+    .footer-links a {display:block;color:var(--text-muted);margin:12px 0;transition:0.4s;}
+    .footer-links a:hover {color:var(--gold);padding-right:12px;}
+    .footer-contact p {margin:15px 0;color:var(--text-muted);}
+    .footer-contact a {color:var(--gold);font-weight:600;}
+    .copyright {text-align:center;margin-top:80px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.05);color:#666;font-size:15px;}
+
+    @media (max-width:992px) {.tips-grid, .projects-grid {grid-template-columns:1fr;gap:50px;}.hero h1 {font-size:60px;}.section-title {font-size:48px;}.hero-buttons {flex-direction:column;align-items:center;}.btn-hero {width:80%;max-width:340px;}}
+    @media (max-width:576px) {.hero h1 {font-size:48px;}.hero p {font-size:20px;}.section-title {font-size:42px;margin-bottom:80px;}.tip-card, .project-card {padding:50px 25px;height:400px;}.tip-number {width:70px;height:70px;font-size:32px;}}
+  </style>
+</head>
+<body>
+
+  <!-- دکمه منو -->
+  <button id="menuBtn">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- منوی کناری -->
+  <aside id="sideMenu">
+    <div class="menu-header">
+      <div class="menu-logo">ژینوسازه</div>
+      <button id="closeMenu">×</button>
+    </div>
+    <nav>
+      <a href="#" class="menu-item">خانه</a>
+      <div class="menu-item sub-toggle" data-target="services">
+        خدمات
+        <svg width="20" height="20" style="margin-right:auto; transform:rotate(180deg)">
+          <path d="M8 6l4 6-4 6" stroke="currentColor" fill="none" stroke-width="2.2"/>
+        </svg>
+      </div>
+      <div class="submenu" id="services">
+        <a href="#">طراحی غرفه نمایشگاهی</a>
+        <a href="#">اجرای غرفه و نصب</a>
+        <a href="#">مشاوره و برندینگ</a>
+        <a href="#">غرفه‌های مدولار</a>
+      </div>
+      <a href="#projects" class="menu-item">نمونه‌کارها</a>
+      <a href="#" class="menu-item">درباره ما</a>
+      <a href="#" class="menu-item">تماس با ما</a>
+      <div style="margin-top:70px;padding:32px;background:rgba(212,175,55,0.1);border-radius:22px;border:1px solid rgba(212,175,55,0.3);text-align:center">
+        <p style="color:var(--gold);font-size:19px;font-weight:700;margin-bottom:16px">تماس سریع</p>
+        <a href="tel:+982174495" style="color:#fff;font-size:26px;font-weight:900">021 - 744 95</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <!-- هیرو -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>غرفه سازی<br>حرفه‌ای</h1>
+      <p>فقط ۱۰٪ غرفه‌ها واقعاً دیده می‌شوند. ما به شما کمک می‌کنیم جزو همان ۱۰٪ باشید — با طراحی‌های لوکس و استراتژیک.</p>
+      <div class="hero-buttons">
+        <button class="btn-hero btn-primary">مشاوره رایگان</button>
+        <button class="btn-hero btn-outline">دانلود چک‌لیست</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۵ راز طلایی -->
+  <section class="tips-section">
+    <div class="container-fluid">
+      <h2 class="section-title">۵ راز طلایی غرفه سازی موفق</h2>
+      <div class="tips-grid">
+        <div class="tip-card" data-number="۰۱">
+          <div class="tip-number">۰۱</div>
+          <h3>مکان استراتژیک</h3>
+          <p>نزدیک ورودی اصلی، راهروهای پرتردد یا کنار کافه و دستشویی. هرگز پشت ستون یا گوشه نباشید.</p>
+        </div>
+        <div class="tip-card" data-number="۰۲">
+          <div class="tip-number">۰۲</div>
+          <h3>طراحی متفاوت</h3>
+          <p>دیوار پشتی = بیلبورد شما. مانیتور بزرگ، نورپردازی دراماتیک، رنگ برند و پیام کلیدی.</p>
+        </div>
+        <div class="tip-card" data-number="۰۳">
+          <div class="tip-number">۰۳</div>
+          <h3>پرسنل حرفه‌ای</h3>
+          <p>لباس یکدست، لبخند واقعی، دانش محصول. پرسنل خسته = مشتری از دست رفته.</p>
+        </div>
+        <div class="tip-card" data-number="۰۴">
+          <div class="tip-number">۰۴</div>
+          <h3>سرگرمی و تعامل</h3>
+          <p>مسابقه، ورکشاپ، سلبریتی، واقعیت مجازی، ایستگاه شارژ — هر چیزی که بازدیدکننده را نگه دارد.</p>
+        </div>
+        <div class="tip-card" data-number="۰۵">
+          <div class="tip-number">۰۵</div>
+          <h3>هدیه فراموش‌نشدنی</h3>
+          <p>نه خودکار معمولی! هدیه کاربردی با لوگو، شکلات با بسته‌بندی لوکس، تجربه‌ای که در ذهن بماند.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- نمونه‌کارهای غرفه سازی -->
+  <section class="projects-section" id="projects">
+    <div class="container-fluid">
+      <h2 class="section-title">نمونه‌کارهای غرفه‌سازی ما</h2>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">همه</button>
+        <button class="filter-btn" data-filter="نفت">نفت و گاز</button>
+        <button class="filter-btn" data-filter="خودرو">خودرو</button>
+        <button class="filter-btn" data-filter="فناوری">فناوری</button>
+        <button class="filter-btn" data-filter="پزشکی">پزشکی</button>
+        <button class="filter-btn" data-filter="معماری">معماری</button>
+        <button class="filter-btn" data-filter="غذا">غذا</button>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card" data-category="نفت">
+          <img src="./assets/Image/bg.png" alt="غرفه نفت">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">نمایشگاه نفت و گاز</div>
+              <div class="project-subtitle">غرفه شرکت ملی نفت ایران</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="خودرو">
+          <img src="./assets/Image/bg.png" alt="غرفه خودرو">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">اتو اکسپو تهران</div>
+              <div class="project-subtitle">غرفه پورشه ایران</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="فناوری">
+          <img src="./assets/Image/bg.png" alt="غرفه فناوری">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">الکامپ ۱۴۰۳</div>
+              <div class="project-subtitle">غرفه همراه اول</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="پزشکی">
+          <img src="./assets/Image/bg.png" alt="غرفه پزشکی">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">ایران هلث</div>
+              <div class="project-subtitle">غرفه تجهیزات پزشکی رادمان</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="معماری">
+          <img src="./assets/Image/bg.png" alt="غرفه معماری">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">نمایشگاه معماری</div>
+              <div class="project-subtitle">غرفه آریا سازه</div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-category="غذا">
+          <img src="./assets/Image/bg.png" alt="غرفه غذا">
+          <div class="project-overlay">
+            <div>
+              <div class="project-title">ایران فود</div>
+              <div class="project-subtitle">غرفه صنایع غذایی بهروز</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- کال تو اکشن -->
+  <section class="cta-section">
+    <div class="container-fluid">
+      <h2 class="cta-title">آماده غرفه‌ای هستید که بدرخشد؟</h2>
+      <p class="cta-text">با مشاوره رایگان، غرفه‌ای طراحی کنید که برندتان را به اوج برساند.</p>
+      <button class="cta-btn">تماس بگیرید: 021 - 744 95</button>
+    </div>
+  </section>
+
+  <!-- فوتر -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">ژینوسازه</div>
+        <p class="footer-text">طراحی و اجرای غرفه‌های نمایشگاهی لوکس — بیش از ۲۰ سال تجربه در خلق تجربیات برندینگ.</p>
+      </div>
+      <div class="footer-links">
+        <h4>لینک‌های سریع</h4>
+        <a href="#">خانه</a>
+        <a href="#">خدمات</a>
+        <a href="#">نمونه‌کارها</a>
+        <a href="#">درباره ما</a>
+        <a href="#">تماس</a>
+      </div>
+      <div class="footer-contact">
+        <h4>تماس با ما</h4>
+        <p>021 - 744 95</p>
+        <p>info@zhinoosazeh.com</p>
+        <p>تهران — میدان ونک</p>
+      </div>
+    </div>
+    <div class="copyright">© ۱۴۰۴ ژینوسازه — تمامی حقوق محفوظ است</div>
+  </footer>
+
+  <script>
+    // منو
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    const closeMenu = document.getElementById('closeMenu');
+    menuBtn.onclick = () => { sideMenu.classList.add('open'); overlay.classList.add('show'); document.body.style.overflow='hidden'; };
+    const close = () => { sideMenu.classList.remove('open'); overlay.classList.remove('show'); document.body.style.overflow=''; };
+    closeMenu.onclick = overlay.onclick = close;
+
+    // ساب‌منو
+    document.querySelectorAll('.sub-toggle').forEach(btn => {
+      btn.onclick = () => {
+        const sub = document.getElementById(btn.dataset.target);
+        sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+      };
+    });
+
+    // فیلتر پروژه‌ها
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    filterBtns.forEach(btn => {
+      btn.onclick = () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => { card.style.display = 'none'; }, 300);
+          }
+        });
+      };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تقویم نمایشگاهی — ژینوسازه</title>
+  <meta name="description" content="تقویم کامل نمایشگاه‌های تهران و ایران برای طراحی و اجرای غرفه‌های لوکس." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0f15;
+      --card: #0e141b;
+      --accent: #0f4c75;
+      --accent-light: #1e6fa0;
+      --gold: #d4af37;
+      --glass-border: rgba(30, 111, 160, 0.3);
+      --text: #e8f1f8;
+      --text-muted: #94b0c9;
+      --radius: 28px;
+      --transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Light.woff2') format('woff2');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Medium.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Bold.woff2') format('woff2');
+      font-weight: 700; font-display: swap;
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body, html { height:100%; background:var(--bg); color:var(--text); font-family:'Vazir', sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+
+    /* دکمه منوی شناور (از کد اصلی) */
+    #menuBtn {
+      position:fixed; right:32px; bottom:32px; z-index:9999;
+      width:72px; height:72px; border-radius:50%; background:var(--accent);
+      border:2px solid var(--glass-border); color:#fff; font-size:30px;
+      box-shadow:0 20px 60px rgba(15,76,117,0.7); backdrop-filter:blur(16px);
+      transition:var(--transition); cursor:pointer; display:grid; place-items:center;
+    }
+    #menuBtn:hover { transform:scale(1.18) rotate(90deg); background:var(--gold); }
+
+    /* منوی کناری (از کد اصلی - ساده نگه داشتم) */
+    #sideMenu {
+      position:fixed; top:0; right:-480px; width:480px; max-width:94vw; height:100%;
+      background:rgba(10,15,21,0.95); backdrop-filter:blur(32px);
+      border-left:1px solid rgba(212,175,55,0.15);
+      box-shadow:-60px 0 140px rgba(0,0,0,0.9); z-index:9998;
+      padding:60px 45px; transition:var(--transition); overflow-y:auto;
+    }
+    #sideMenu.open { right:0; }
+
+    .menu-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:70px; }
+    .menu-logo {
+      font-size:38px; font-weight:900;
+      background:linear-gradient(90deg,#fff,var(--gold),#fff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    #closeMenu {
+      width:60px; height:60px; border-radius:50%; background:transparent;
+      border:2px solid rgba(255,255,255,0.2); color:#fff; font-size:32px;
+      cursor:pointer; transition:var(--transition); display:grid; place-items:center;
+    }
+    #closeMenu:hover { border-color:var(--gold); color:var(--gold); background:rgba(212,175,55,0.1); }
+
+    .menu-item {
+      display:block; padding:22px 28px; margin:12px 0; border-radius:18px;
+      font-size:20px; font-weight:600; color:var(--text-muted);
+      transition:var(--transition); position:relative; overflow:hidden; cursor:pointer;
+    }
+    .menu-item:hover {
+      color:#fff; background:rgba(255,255,255,0.04); padding-right:40px;
+      border-right:4px solid var(--gold);
+    }
+
+    #overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.75); opacity:0;
+      pointer-events:none; transition:opacity 0.6s; z-index:9997;
+    }
+    #overlay.show { opacity:1; pointer-events:auto; }
+
+    /* هیرو ساده برای تقویم */
+    .hero {
+      height:80vh; display:flex; align-items:center; justify-content:center; text-align:center;
+      position:relative; overflow:hidden; background:linear-gradient(135deg, var(--accent), var(--bg));
+    }
+    .hero-content { position:relative; z-index:2; max-width:800px; padding:0 20px; }
+    .hero h1 {
+      font-size:clamp(48px,8vw,88px); font-weight:900; line-height:1.12;
+      background:linear-gradient(90deg,#fff,var(--gold),#fff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:20px;
+    }
+    .hero p { font-size:20px; color:var(--text-muted); }
+
+    /* بخش تقویم - شبیه به سایت اصلی، اما لوکس‌تر */
+    #calendar { padding:120px 0; }
+    .section-title {
+      font-size:56px; font-weight:900; text-align:center; margin-bottom:80px;
+      background:linear-gradient(90deg,#fff,var(--gold));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+
+    .month-section {
+      background:var(--card); border:1px solid var(--glass-border); border-radius:var(--radius);
+      backdrop-filter:blur(20px); margin-bottom:60px; overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,0.7); transition:var(--transition);
+      opacity:0; transform:translateY(60px);
+    }
+    .month-section.animate { opacity:1; transform:translateY(0); }
+    .month-header {
+      background:linear-gradient(90deg, var(--accent), var(--accent-light)); padding:40px;
+      text-align:center; font-size:32px; font-weight:800; color:#fff;
+    }
+    .exhibitions-grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; padding:50px;
+    }
+    .exhibition-card {
+      background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:18px;
+      padding:30px; transition:var(--transition); cursor:pointer; position:relative; overflow:hidden;
+    }
+    .exhibition-card::before {
+      content:''; position:absolute; inset:0; background:var(--gold); opacity:0; transition:var(--transition);
+    }
+    .exhibition-card:hover { transform:translateY(-10px); box-shadow:0 30px 80px rgba(212,175,55,0.3); }
+    .exhibition-card:hover::before { opacity:0.08; }
+    .ex-date { font-size:24px; font-weight:700; color:var(--gold); margin-bottom:15px; }
+    .ex-title { font-size:20px; font-weight:600; margin-bottom:10px; }
+    .ex-venue { font-size:16px; color:var(--text-muted); }
+    .ex-link { display:inline-block; margin-top:15px; color:var(--gold); font-weight:600; font-size:16px; }
+    .ex-link:hover { text-decoration:underline; }
+
+    .btn-back {
+      display:block; margin:0 auto 60px; padding:18px 50px;
+      background:transparent; border:2px solid var(--gold); color:var(--gold);
+      border-radius:50px; font-weight:700; font-size:18px; cursor:pointer;
+      transition:var(--transition); max-width:280px;
+    }
+    .btn-back:hover { background:var(--gold); color:#000; transform:translateY(-8px); }
+
+    @media (max-width:992px) {
+      .exhibitions-grid { grid-template-columns:1fr; padding:30px; }
+      .month-header { font-size:26px; padding:30px; }
+    }
+    @media (max-width:576px) {
+      .section-title { font-size:40px; }
+      .exhibitions-grid { padding:20px; gap:20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- دکمه منو (از کد اصلی) -->
+  <button id="menuBtn" aria-label="باز کردن منو">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- منوی کناری (ساده‌شده) -->
+  <aside id="sideMenu">
+    <div class="menu-header">
+      <div class="menu-logo">ژینوسازه</div>
+      <button id="closeMenu" aria-label="بستن">×</button>
+    </div>
+    <nav>
+      <a href="index.html" class="menu-item">خانه</a>
+      <a href="#projects" class="menu-item">نمونه‌کارها</a>
+      <a href="calendar.html" class="menu-item">تقویم نمایشگاهی</a>
+      <a href="#" class="menu-item">تماس با ما</a>
+    </nav>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <!-- هیرو -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>تقویم نمایشگاهی</h1>
+      <p>تاریخ‌های کلیدی برای طراحی و اجرای غرفه‌های لوکس در تهران و ایران</p>
+    </div>
+  </section>
+
+  <!-- تقویم -->
+  <section id="calendar" class="container">
+    <h2 class="section-title">نمایشگاه‌های پیش‌رو</h2>
+
+    <!-- ماه نمونه ۱ - شهریور ۱۴۰۳ -->
+    <section class="month-section">
+      <div class="month-header">تقویم نمایشگاه شهریور ماه ۱۴۰۳</div>
+      <div class="exhibitions-grid">
+        <div class="exhibition-card">
+          <div class="ex-date">۳ - ۹ شهریور</div>
+          <div class="ex-title">نمایشگاه فرش دستباف ایران</div>
+          <div class="ex-venue">نمایشگاه بین‌المللی تهران</div>
+          <a href="/projects/?related=75" class="ex-link">نمایش پروژه‌های مرتبط</a>
+        </div>
+        <div class="exhibition-card">
+          <div class="ex-date">۱۰ - ۱۶ شهریور</div>
+          <div class="ex-title">نمایشگاه نفت و گاز</div>
+          <div class="ex-venue">نمایشگاه بین‌المللی تهران</div>
+          <a href="/projects/?related=76" class="ex-link">نمایش پروژه‌های مرتبط</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ماه نمونه ۲ - مهر ۱۴۰۳ -->
+    <section class="month-section">
+      <div class="month-header">تقویم نمایشگاه مهر ماه ۱۴۰۳</div>
+      <div class="exhibitions-grid">
+        <div class="exhibition-card">
+          <div class="ex-date">۱ - ۷ مهر</div>
+          <div class="ex-title">اتو اکسپو تهران</div>
+          <div class="ex-venue">نمایشگاه بین‌المللی تهران</div>
+          <a href="/projects/?related=77" class="ex-link">نمایش پروژه‌های مرتبط</a>
+        </div>
+        <div class="exhibition-card">
+          <div class="ex-date">۱۵ - ۲۱ مهر</div>
+          <div class="ex-title">الکامپ ۱۴۰۳</div>
+          <div class="ex-venue">نمایشگاه بین‌المللی تهران</div>
+          <a href="/projects/?related=78" class="ex-link">نمایش پروژه‌های مرتبط</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- می‌تونی ماه‌های بیشتری اضافه کنی... -->
+
+    <a href="index.html" class="btn-back">بازگشت به خانه</a>
+  </section>
+
+  <script>
+    // منوی شناور (از کد اصلی)
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    const closeMenu = document.getElementById('closeMenu');
+
+    function openMenu() {
+      sideMenu.classList.add('open');
+      overlay.classList.add('show');
+      menuBtn.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenuFunc() {
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+      menuBtn.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.onclick = openMenu;
+    closeMenu.onclick = closeMenuFunc;
+    overlay.onclick = closeMenuFunc;
+
+    // انیمیشن ورود ماه‌ها موقع اسکرول (مثل کارت‌های پروژه)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.month-section').forEach((month, i) => {
+      month.style.transitionDelay = `${i * 0.2}s`;
+      observer.observe(month);
+    });
+
+    // اسکرول نرم
+    document.documentElement.style.scrollBehavior = 'smooth';
+  </script>
+</body>
+</html>

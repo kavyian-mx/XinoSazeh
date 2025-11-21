@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>اخبار و مقالات — ژینوسازه</title>
+  <meta name="description" content="آخرین اخبار صنعت نمایشگاهی، به‌روزرسانی‌های پروژه‌ها و مقالات تخصصی طراحی غرفه." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0f15;
+      --card: #0e141b;
+      --accent: #0f4c75;
+      --accent-light: #1e6fa0;
+      --gold: #d4af37;
+      --glass-border: rgba(30, 111, 160, 0.3);
+      --text: #e8f1f8;
+      --text-muted: #94b0c9;
+      --radius: 28px;
+      --transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Light.woff2') format('woff2');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Medium.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazir';
+      src: url('https://cdn.fontcdn.ir/Fonts/Vazir/Vazir-Bold.woff2') format('woff2');
+      font-weight: 700; font-display: swap;
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body, html { height:100%; background:var(--bg); color:var(--text); font-family:'Vazir', sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+
+    /* دکمه منوی شناور */
+    #menuBtn {
+      position:fixed; right:32px; bottom:32px; z-index:9999;
+      width:72px; height:72px; border-radius:50%; background:var(--accent);
+      border:2px solid var(--glass-border); color:#fff; font-size:30px;
+      box-shadow:0 20px 60px rgba(15,76,117,0.7); backdrop-filter:blur(16px);
+      transition:var(--transition); cursor:pointer; display:grid; place-items:center;
+    }
+    #menuBtn:hover { transform:scale(1.18) rotate(90deg); background:var(--gold); }
+
+    /* منوی کناری */
+    #sideMenu {
+      position:fixed; top:0; right:-480px; width:480px; max-width:94vw; height:100%;
+      background:rgba(10,15,21,0.95); backdrop-filter:blur(32px);
+      border-left:1px solid rgba(212,175,55,0.15);
+      box-shadow:-60px 0 140px rgba(0,0,0,0.9); z-index:9998;
+      padding:60px 45px; transition:var(--transition); overflow-y:auto;
+    }
+    #sideMenu.open { right:0; }
+
+    .menu-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:70px; }
+    .menu-logo {
+      font-size:38px; font-weight:900;
+      background:linear-gradient(90deg,#fff,var(--gold),#fff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    #closeMenu {
+      width:60px; height:60px; border-radius:50%; background:transparent;
+      border:2px solid rgba(255,255,255,0.2); color:#fff; font-size:32px;
+      cursor:pointer; transition:var(--transition); display:grid; place-items:center;
+    }
+    #closeMenu:hover { border-color:var(--gold); color:var(--gold); background:rgba(212,175,55,0.1); }
+
+    .menu-item {
+      display:block; padding:22px 28px; margin:12px 0; border-radius:18px;
+      font-size:20px; font-weight:600; color:var(--text-muted);
+      transition:var(--transition); position:relative; overflow:hidden; cursor:pointer;
+    }
+    .menu-item:hover {
+      color:#fff; background:rgba(255,255,255,0.04); padding-right:40px;
+      border-right:4px solid var(--gold);
+    }
+
+    #overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.75); opacity:0;
+      pointer-events:none; transition:opacity 0.6s; z-index:9997;
+    }
+    #overlay.show { opacity:1; pointer-events:auto; }
+
+    /* هیرو */
+    .hero {
+      height:80vh; display:flex; align-items:center; justify-content:center; text-align:center;
+      position:relative; overflow:hidden; background:linear-gradient(135deg, var(--accent), var(--bg));
+    }
+    .hero-content { position:relative; z-index:2; max-width:800px; padding:0 20px; }
+    .hero h1 {
+      font-size:clamp(48px,8vw,88px); font-weight:900; line-height:1.12;
+      background:linear-gradient(90deg,#fff,var(--gold),#fff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:20px;
+    }
+    .hero p { font-size:20px; color:var(--text-muted); }
+
+    /* بخش اخبار */
+    #news { padding:120px 0; }
+    .section-title {
+      font-size:56px; font-weight:900; text-align:center; margin-bottom:80px;
+      background:linear-gradient(90deg,#fff,var(--gold));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+
+    .categories-filter {
+      display:flex; justify-content:center; gap:20px; margin-bottom:60px; flex-wrap:wrap;
+    }
+    .filter-btn {
+      padding:16px 32px; border-radius:50px; background:transparent;
+      border:2px solid var(--glass-border); color:var(--text-muted); font-weight:600; font-size:18px;
+      cursor:pointer; transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .filter-btn::before {
+      content:''; position:absolute; inset:0; background:var(--gold); opacity:0; transition:var(--transition);
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      color:#fff; border-color:var(--gold); transform:translateY(-4px);
+    }
+    .filter-btn.active::before,
+    .filter-btn:hover::before { opacity:0.15; }
+    .filter-btn.active { background:var(--gold); color:#000; }
+
+    .posts-grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr)); gap:40px;
+    }
+    .post-card {
+      background:var(--card); border:1px solid var(--glass-border); border-radius:var(--radius);
+      backdrop-filter:blur(20px); overflow:hidden; transition:var(--transition);
+      opacity:0; transform:translateY(60px);
+    }
+    .post-card.animate { opacity:1; transform:translateY(0); }
+    .post-card:hover { transform:translateY(-20px); box-shadow:0 40px 100px rgba(212,175,55,0.4); }
+    .post-image { width:100%; height:220px; object-fit:cover; }
+    .post-content { padding:30px; }
+    .post-category { display:inline-block; padding:8px 20px; background:var(--accent); color:#fff; border-radius:20px; font-size:14px; font-weight:600; margin-bottom:15px; }
+    .post-date { font-size:16px; color:var(--text-muted); margin-bottom:15px; }
+    .post-title { font-size:24px; font-weight:800; margin-bottom:15px; line-height:1.3; }
+    .post-excerpt { color:var(--text-muted); margin-bottom:25px; line-height:1.6; }
+    .post-link { display:inline-block; color:var(--gold); font-weight:700; font-size:16px; }
+    .post-link:hover { text-decoration:underline; }
+
+    .no-posts { text-align:center; padding:80px; color:var(--text-muted); font-size:20px; }
+
+    .btn-back {
+      display:block; margin:80px auto 0; padding:18px 50px;
+      background:transparent; border:2px solid var(--gold); color:var(--gold);
+      border-radius:50px; font-weight:700; font-size:18px; cursor:pointer;
+      transition:var(--transition); max-width:280px;
+    }
+    .btn-back:hover { background:var(--gold); color:#000; transform:translateY(-8px); }
+
+    @media (max-width:992px) {
+      .posts-grid { grid-template-columns:1fr; gap:30px; }
+      .categories-filter { flex-direction:column; align-items:center; gap:15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- دکمه منو -->
+  <button id="menuBtn" aria-label="باز کردن منو">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- منوی کناری -->
+  <aside id="sideMenu">
+    <div class="menu-header">
+      <div class="menu-logo">ژینوسازه</div>
+      <button id="closeMenu" aria-label="بستن">×</button>
+    </div>
+    <nav>
+      <a href="index.html" class="menu-item">خانه</a>
+      <a href="news.html" class="menu-item">اخبار و مقالات</a>
+      <a href="calendar.html" class="menu-item">تقویم نمایشگاهی</a>
+      <a href="#" class="menu-item">تماس با ما</a>
+    </nav>
+  </aside>
+
+  <div id="overlay"></div>
+
+  <!-- هیرو -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>اخبار و مقالات</h1>
+      <p>آخرین تحولات صنعت، به‌روزرسانی‌های ژینوسازه و نکات تخصصی طراحی غرفه</p>
+    </div>
+  </section>
+
+  <!-- اخبار -->
+  <section id="news" class="container">
+    <h2 class="section-title">آخرین مطالب</h2>
+
+    <div class="categories-filter">
+      <button class="filter-btn active" data-category="all">همه</button>
+      <button class="filter-btn" data-category="industry">اخبار صنعت</button>
+      <button class="filter-btn" data-category="company">به‌روزرسانی‌های شرکت</button>
+      <button class="filter-btn" data-category="articles">مقالات و نکات</button>
+    </div>
+
+    <div class="posts-grid" id="postsGrid">
+
+      <article class="post-card" data-category="industry">
+        <img class="post-image" src="./assets/Image/bg.png" alt="نمایشگاه تهران">
+        <div class="post-content">
+          <span class="post-category">اخبار صنعت</span>
+          <div class="post-date">۱۴۰۳/۰۸/۱۵</div>
+          <h3 class="post-title">نمایشگاه بین‌المللی تهران رکورد بازدیدکننده زد</h3>
+          <p class="post-excerpt">در دوره اخیر، نمایشگاه تهران با بیش از ۵۰۰ هزار بازدیدکننده، رکورد جدیدی در جذب مخاطب ثبت کرد...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="company">
+        <img class="post-image" src="./assets/Image/bg.png" alt="تیم ژینوسازه">
+        <div class="post-content">
+          <span class="post-category">به‌روزرسانی‌های شرکت</span>
+          <div class="post-date">۱۴۰۳/۰۸/۱۰</div>
+          <h3 class="post-title">پیوستن دو طراح جدید به تیم ژینوسازه</h3>
+          <p class="post-excerpt">با افتخار اعلام می‌کنیم که دو طراح برجسته معماری موقت به تیم ما پیوستند...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="articles">
+        <img class="post-image" src="./assets/Image/bg.png" alt="طراحی غرفه">
+        <div class="post-content">
+          <span class="post-category">مقالات و نکات</span>
+          <div class="post-date">۱۴۰۳/۰۸/۰۵</div>
+          <h3 class="post-title">۵ نکته کلیدی برای برندینگ در غرفه‌های نمایشگاهی</h3>
+          <p class="post-excerpt">چگونه غرفه‌تان را به ابزاری قدرتمند برای برندینگ تبدیل کنید؟...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="industry">
+        <img class="post-image" src="./assets/Image/bg.png" alt="قوانین جدید">
+        <div class="post-content">
+          <span class="post-category">اخبار صنعت</span>
+          <div class="post-date">۱۴۰۳/۰۷/۳۰</div>
+          <h3 class="post-title">تغییرات جدید در قوانین غرفه‌سازی ۱۴۰۴</h3>
+          <p class="post-excerpt">سازمان نمایشگاه‌ها استانداردهای ایمنی و پایداری را سختگیرانه‌تر کرد...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="company">
+        <img class="post-image" src="./assets/Image/bg.png" alt="غرفه پورشه">
+        <div class="post-content">
+          <span class="post-category">به‌روزرسانی‌های شرکت</span>
+          <div class="post-date">۱۴۰۳/۰۷/۲۵</div>
+          <h3 class="post-title">اجرای موفق غرفه پورشه در اتو اکسپو</h3>
+          <p class="post-excerpt">پروژه غرفه لوکس پورشه با استقبال بی‌نظیر روبرو شد...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="articles">
+        <img class="post-image" src="./assets/Image/bg.png" alt="معماری موقت">
+        <div class="post-content">
+          <span class="post-category">مقالات و نکات</span>
+          <div class="post-date">۱۴۰۳/۰۷/۲۰</div>
+          <h3 class="post-title">معماری موقت: آینده غرفه‌های پایدار</h3>
+          <p class="post-excerpt">چگونه مواد بازیافتی و طراحی مدولار هزینه‌ها را ۳۰% کاهش می‌دهد...</p>
+          <a href="#" class="post-link">ادامه مطلب →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <a href="index.html" class="btn-back">بازگشت به خانه</a>
+  </section>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    const closeMenu = document.getElementById('closeMenu');
+
+    function openMenu() {
+      sideMenu.classList.add('open');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenuFunc() {
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.onclick = openMenu;
+    closeMenu.onclick = closeMenuFunc;
+    overlay.onclick = closeMenuFunc;
+
+    // فیلتر دسته‌بندی
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.onclick = () => {
+        const category = btn.dataset.category;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.post-card').forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      };
+    });
+
+    // انیمیشن ورود کارت‌ها
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.post-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.15}s`;
+      observer.observe(card);
+    });
+
+    document.documentElement.style.scrollBehavior = 'smooth';
+  </script>
+</body>
+</html>

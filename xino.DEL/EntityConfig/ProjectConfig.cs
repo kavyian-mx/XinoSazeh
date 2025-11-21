@@ -12,7 +12,6 @@ public class ProjectConfig : IEntityTypeConfiguration<Project>
     {
         builder.Property(x => x.BuildDate).HasDefaultValueSql("GETDATE()");
         builder.Property(x => x.IsDeleted).HasDefaultValue(false);
-        builder.Property(x => x.Slug).IsRequired().HasMaxLength(200);
         builder.Property(x => x.HeaderImage).IsRequired();
         builder.Property(x => x.ProjectSize).IsRequired().HasMaxLength(125);
         builder.Property(x => x.YearProject).IsRequired();
