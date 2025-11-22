@@ -2,7 +2,7 @@
 
 namespace xino.DEL.Entity;
 
-   public class blug: PageBaseSeo
+   public class blug : PageBaseSeo
 {
     public int Id { get; set; }
 
@@ -26,7 +26,7 @@ namespace xino.DEL.Entity;
    
     public bool IsDeleted { get; set; }
 
-    public List<GalleryImageBlug> GalleryImageBlug { get; set; }
+    public virtual List<GalleryImageBlug> GalleryImageBlug { get; set; }
 
 }
 

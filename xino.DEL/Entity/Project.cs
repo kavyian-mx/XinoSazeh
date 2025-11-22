@@ -24,7 +24,7 @@ namespace xino.DEL.Entity;
 
     public bool IsDeleted { get; set; }
 
-    public List<GalleryImageProject> GalleryImageProject { get; set; }
+    public virtual List<GalleryImageProject> GalleryImageProject { get; set; }
 
 
 }

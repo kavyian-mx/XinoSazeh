@@ -11,7 +11,7 @@ public class GalleryImageProject
     public int Order { get; set; }
 
 
-    public Project Project { get; set; }
+    public virtual Project Project { get; set; }
 
     public int ProjectId { get; set; }
 

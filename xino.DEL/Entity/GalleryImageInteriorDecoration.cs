@@ -12,7 +12,7 @@ public class GalleryImageInteriorDecoration
 
 
 
-    public InteriorDecoration InteriorDecoration { get; set; }
+    public virtual InteriorDecoration InteriorDecoration { get; set; }
 
     public int InteriorDecorationId { get; set; }
 

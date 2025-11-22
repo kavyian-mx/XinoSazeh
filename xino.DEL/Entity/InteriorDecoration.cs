@@ -15,7 +15,7 @@ public class InteriorDecoration:PageBaseSeo
     public string Slug { get; set; }
 
     
-    public List<GalleryImageInteriorDecoration> GalleryImageInteriorDecoration { get; set; }
+    public virtual List<GalleryImageInteriorDecoration> GalleryImageInteriorDecoration { get; set; }
 }
 
 

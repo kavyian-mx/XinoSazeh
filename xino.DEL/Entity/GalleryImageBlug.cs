@@ -11,7 +11,7 @@ public class GalleryImageBlug
     public int Order { get; set; }
 
 
-    public blug blug { get; set; }
+    public virtual blug blug { get; set; }
 
     public int BlugId { get; set; }
 
