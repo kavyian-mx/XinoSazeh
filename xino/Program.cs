@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ENDPOINTs.Models.mapping;
+using Microsoft.EntityFrameworkCore;
 using xino.DEL.ContextFile;
+
+using xino.SERVICE.UserService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +11,11 @@ builder.Services.AddDbContext<MyContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddAutoMapper(typeof(Profilemap));
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<ConsultationServiceUser>();
+builder.Services.AddScoped<CurriculumVitaeService>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
