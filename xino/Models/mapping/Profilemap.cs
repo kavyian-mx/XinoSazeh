@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ENDPOINTs.Models.DTOs;
+using xino.DEL.Entity;
 
 namespace ENDPOINTs.Models.mapping;
 
@@ -6,7 +8,7 @@ namespace ENDPOINTs.Models.mapping;
     {
         public Profilemap()
         {
-            
+        CreateMap<ConsultationCreateDto, Consultation>();
 
             
         }

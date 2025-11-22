@@ -5,19 +5,19 @@ using xino.DEL.ContextFile;
 using xino.DEL.Entity;
 
 
-namespace xino.SERVICE.UserService;
+namespace xino.SERVICE.Service;
 
-   public class ConsultationServiceUser(MyContext context)
+   public class ConsultationService(MyContext context)
     {
     private readonly MyContext _context = context;
 
-    public async Task Create(Consultation consultation)
+    public async Task AddAsync(Consultation consultation)
     {
         _context.Consultations.Add(consultation);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Consultation>> ToListCheck()
+    public async Task<List<Consultation>> GetUncheckedAsync()
     {
         return await _context.Consultations
             .Where(x => x.IsChacket == false)
@@ -25,7 +25,7 @@ namespace xino.SERVICE.UserService;
             .ToListAsync();
     }
 
-    public async Task<List<Consultation>> ToNotCheck()
+    public async Task<List<Consultation>> GetCheckedAsync()
     {
         return await _context.Consultations
             .Where(x => x.IsChacket == true)
@@ -33,7 +33,7 @@ namespace xino.SERVICE.UserService;
             .ToListAsync();
     }
 
-    public async Task Check(int id)
+    public async Task MarkAsCheckedAsync(int id)
     {
         var item = await _context.Consultations.FindAsync(id);
 

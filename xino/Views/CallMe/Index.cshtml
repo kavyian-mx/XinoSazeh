@@ -1,468 +1,168 @@
-﻿
+﻿@using ENDPOINTs.Models.DTOs
 @{
-
     Layout = null;
 }
+@model ConsultationCreateDto
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>ژینوسازه — تماس و فرصت‌های شغلی</title>
-    <meta name="description" content="پاپ‌آپ‌های رسمی برای تماس و فرصت‌های شغلی — سازگار با مدل‌های Consultation و CurriculumVitae." />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ژینوسازه — درخواست مشاوره غرفه نمایشگاهی</title>
+    <meta name="description" content="درخواست مشاوره رایگان طراحی و اجرای غرفه نمایشگاهی" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/Style/callmestyle.css">
-
+    <link rel="stylesheet" href="/assets/Style/styleindex.css">
+    <link rel="stylesheet" href="/assets/Style/callmestyle.css">
+   
 </head>
 <body>
 
-    <main class="hero">
-        <div class="container-card container">
-            <div class="brand-card" id="brandCard">
-                <div class="brand-title">ژینوسازه</div>
-                <div class="brand-sub">طراحی داخلی و غرفه‌سازی حرفه‌ای — از ایده تا اجرا همراه شما</div>
+    <!-- دکمه منو -->
+    <button id="menuBtn" aria-label="باز کردن منو">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
 
-                <!-- stacked contact info (new) -->
-                <div class="contact-stack" aria-hidden="false">
-                    <div style="color:var(--muted); font-size:14px">برای مشاوره و استعلام:</div>
-
-                    <div class="contact-row">
-                        <!-- phone icon -->
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)" /></svg>
-                        <div class="contact-text">021-91001234</div>
-                    </div>
-
-                    <div class="contact-row">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)" /></svg>
-                        <div class="contact-text">0902-007-5495</div>
-                    </div>
-
-                    <div class="contact-row">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)" /></svg>
-                        <div class="contact-text">info@company.com</div>
-                    </div>
-
-                    <!-- buttons under contact -->
-                    <div class="cta-buttons" style="margin-top:12px">
-                        <button id="openJobs" class="btn-cta btn-primary">فرصت‌های شغلی</button>
-                        <button id="openContact" class="btn-cta btn-outline">تماس با ما</button>
-                    </div>
-                </div>
-
-                <div class="meta-row" style="margin-top:18px">
-                    <div class="tag">پروژه‌های نمایشگاهی</div>
-                    <div class="tag">طراحی مفهومی</div>
-                    <div class="tag">اجرا و نصب</div>
-                </div>
-            </div>
-
-            <aside class="info-panel">
-                <h5 style="margin:0 0 6px 0">تماس سریع</h5>
-                <div class="info-item">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 5h18M7 9h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                    <div style="font-weight:800; font-size:18px">021-91001234</div>
-                </div>
-                <div class="info-item">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
-                    <div class="small-muted">ساعات پاسخگویی: ۹ الی ۱۸ (شنبه تا چهارشنبه)</div>
-                </div>
-                <div style="height:12px"></div>
-                <h6 style="margin-bottom:6px">خلاصه خدمات</h6>
-                <div class="small-muted">طراحی داخلی و غرفه‌سازی حرفه‌ای، مدیریت ساخت، نصب در نمایشگاه‌ها، و مشاوره برندینگ.</div>
-            </aside>
+    <!-- منوی کناری -->
+    <aside id="sideMenu">
+        <div class="menu-header">
+            <div class="menu-logo">ژینوسازه</div>
+            <button id="closeMenu" aria-label="بستن">×</button>
         </div>
-    </main>
+        <nav>
+            <a href="/" class="menu-item">خانه</a>
+            <div class="menu-item sub-toggle" data-target="services">
+                خدمات
+                <svg width="20" height="20" style="margin-right:auto; transform:rotate(180deg)">
+                    <path d="M8 6l4 6-4 6" stroke="currentColor" fill="none" stroke-width="2.2" />
+                </svg>
+            </div>
+            <div class="submenu" id="services">
+                <a href="#">طراحی غرفه نمایشگاهی</a>
+                <a href="#">اجرای غرفه و نصب</a>
+                <a href="#">مشاوره و برندینگ</a>
+                <a href="#">غرفه‌های مدولار</a>
+            </div>
+            <a href="/#projects" class="menu-item">نمونه‌کارها</a>
+            <a href="#" class="menu-item">درباره ما</a>
+            <a href="/CallMe" class="menu-item">تماس با ما</a>
+            <div style="margin-top:70px;padding:32px;background:rgba(212,175,55,0.1);border-radius:22px;border:1px solid rgba(212,175,55,0.3);text-align:center">
+                <p style="color:var(--gold);font-size:19px;font-weight:700;margin-bottom:16px">تماس سریع</p>
+                <a href="tel:+982174495" style="color:#fff;font-size:26px;font-weight:900">021 - 744 95</a>
+            </div>
+        </nav>
+    </aside>
+    <div id="overlay"></div>
 
-    <!-- POPUP: Jobs (CurriculumVitae) -->
-    <div id="jobsBackdrop" class="popup-backdrop" aria-hidden="true">
-        <div class="popup" role="dialog" aria-modal="true" aria-labelledby="jobsTitle">
-            <button class="close-x" aria-label="بستن" data-close>&times;</button>
+    <!-- پاپ‌آپ مشاوره -->
+    <div id="contactBackdrop">
+        <div class="popup">
+            <button class="close-x" data-close>×</button>
+            <div class="popup-header">
+                <h3>درخواست مشاوره تخصصی</h3>
+            </div>
             <div class="popup-grid">
-                <div>
-                    <h3 id="jobsTitle" style="color:var(--accent)">فرصت‌های شغلی</h3>
-                    <p class="lead">
-                        اگر علاقه‌مند به همکاری با یک مجموعه پویا در حوزه طراحی داخلی و غرفه‌سازی هستید، فرم زیر را تکمیل کنید.
-                        اطلاعات شما بررسی شده و در صورت تطابق با نیازهای مجموعه، با شما تماس گرفته خواهد شد.
-                    </p>
+                <div class="form-scroll">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+                            <strong>عالی!</strong> @TempData["Success"]
+                        </div>
+                    }
 
-                    <!-- CurriculumVitae fields -->
-                    <form id="jobsForm" enctype="multipart/form-data" novalidate>
-                        <input type="hidden" name="BuildDate" value="">
-
-                        <div class="field">
-                            <label class="field-label">نام و نام خانوادگی</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM21 21a8 8 0 0 0-18 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="fullname" name="FullName" type="text" placeholder="مثال: علی رضایی" required />
+                    <form asp-action="CreateConsultation" asp-controller="CallMe" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="row g-4">
+                            <div class="col-md-6"><label asp-for="FullName" class="form-label"></label><input asp-for="FullName" class="form-control" placeholder="نام و نام خانوادگی" /><span asp-validation-for="FullName" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="Role" class="form-label"></label><input asp-for="Role" class="form-control" placeholder="سمت سازمانی" /><span asp-validation-for="Role" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="PhoneNumber" class="form-label"></label><input asp-for="PhoneNumber" class="form-control" placeholder="09121234567" /><span asp-validation-for="PhoneNumber" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="Email" class="form-label"></label><input asp-for="Email" type="email" class="form-control" placeholder="email@company.com" /><span asp-validation-for="Email" class="text-danger"></span></div>
+                            ливо                            <div class="col-12"><label asp-for="Company" class="form-label"></label><input asp-for="Company" class="form-control" placeholder="نام شرکت" /><span asp-validation-for="Company" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="Exhibition" class="form-label"></label><input asp-for="Exhibition" class="form-control" placeholder="عنوان نمایشگاه" /><span asp-validation-for="Exhibition" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="DateExhibition" class="form-label"></label><input asp-for="DateExhibition" type="date" class="form-control" /><span asp-validation-for="DateExhibition" class="text-danger"></span></div>
+                            <div class="col-12"><label asp-for="AddressExhibition" class="form-label"></label><textarea asp-for="AddressExhibition" class="form-control" rows="2" placeholder="آدرس دقیق نمایشگاه"></textarea><span asp-validation-for="AddressExhibition" class="text-danger"></span></div>
+                            <div class="col-md-6"><label asp-for="Meterage" class="form-label"></label><div class="input-group"><input asp-for="Meterage" type="number" class="form-control" placeholder="50" /><span class="input-group-text">مترمربع</span></div><span asp-validation-for="Meterage" class="text-danger"></span></div>
+                            <div class="col-12"><label asp-for="TextExhibition" class="form-label"></label><textarea asp-for="TextExhibition" class="form-control" rows="4" placeholder="جزئیات پروژه، سبک دلخواه، بودجه تقریبی و..."></textarea><span asp-validation-for="TextExhibition" class="text-danger"></span></div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit">ارسال درخواست مشاوره</button>
                             </div>
-                            <div class="field-error">لطفاً نام و نام خانوادگی را وارد کنید.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">نام پدر</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
-                                <input id="fatherName" name="FatherName" type="text" placeholder="نام پدر" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">شماره شناسنامه / کد ملی</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
-                                <input id="idNumber" name="IDNumber" type="text" placeholder="مثال: 0123456789" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">سمت مورد نظر (موقعیت شغلی)</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
-                                <select id="jobPosition" name="JobPosition" required>
-                                    <option value="">انتخاب کنید...</option>
-                                    <option value="ArchitectureDepartment">واحد معماری — طراحی مفهومی، نقشه‌های اجرایی و نظارت</option>
-                                    <option value="SalesDepartment">واحد فروش — ارتباط با مشتری، پیگیری قرارداد</option>
-                                    <option value="AdministrationDepartment">واحد اداری — هماهنگی و امور پشتیبانی</option>
-                                </select>
-                            </div>
-                            <div class="field-error">لطفاً یک موقعیت شغلی انتخاب کنید.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">شهر محل سکونت</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 14l11-11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="city" name="City" type="text" placeholder="مثال: تهران" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">جنسیت</label>
-                            <div style="display:flex; gap:12px; align-items:center; margin-top:6px">
-                                <label style="display:flex; gap:8px; align-items:center"><input type="radio" name="gender" value="Male" checked> مرد</label>
-                                <label style="display:flex; gap:8px; align-items:center"><input type="radio" name="gender" value="Female"> زن</label>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">شماره تماس</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="phone" name="PhoneNumber" type="text" placeholder="09xx..." required />
-                            </div>
-                            <div class="field-error">لطفاً شماره تماس معتبر وارد کنید.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">ایمیل</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="emailJob" name="Email" type="email" placeholder="name@example.com" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">توضیحات کوتاه / سوابق</label>
-                            <textarea id="textJob" name="Text" placeholder="چکیده‌ای از سوابق و مهارت‌ها (حداکثر ۳۰۰ کاراکتر)"></textarea>
-                            <div class="small-muted">نوشتن ۲–۳ جمله کوتاه تأثیرگذار توصیه می‌شود.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">ارسال رزومه (PDF، حداکثر ۵ مگابایت)</label>
-                            <div class="filebox">
-                                <label class="fakebtn" for="cvfile">آپلود رزومه</label>
-                                <input id="cvfile" name="File" type="file" accept="application/pdf" />
-                                <div id="fileName" class="small-muted">فایلی انتخاب نشده است</div>
-                            </div>
-                            <div class="field-error" id="fileError">فایل نامعتبر یا بزرگ‌تر از ۵ مگابایت است.</div>
-                        </div>
-
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:8px">
-                            <label style="display:flex; gap:8px; align-items:center"><input type="checkbox" name="IsChacket"> با شرایط و قوانین موافقم</label>
-                        </div>
-
-                        <div class="submit-row">
-                            <button type="button" class="btn-cancel" data-close>انصراف</button>
-                            <button type="submit" class="btn-submit">ارسال درخواست</button>
                         </div>
                     </form>
                 </div>
-
                 <aside class="popup-side">
-                    <h4 style="color:var(--accent)">معرفی واحدها (خلاصه)</h4>
-                    <div class="small-muted">
-                        <strong>واحد معماری</strong> — طراحی مفهومی، مدل‌سازی 3D، تهیه نقشه‌های اجرایی و نظارت بر ساخت.<br><br>
-                        <strong>واحد فروش</strong> — ارتباط با مشتری، تهیه پیشنهاد، پیگیری قرارداد و مدیریت ارتباطات.<br><br>
-                        <strong>واحد اداری</strong> — هماهنگی داخلی، مستندسازی و پشتیبانی پروژه‌ها.
-                    </div>
-                    <hr style="border-color:rgba(255,255,255,0.04)">
-                    <div class="small-muted" style="margin-top:8px">
-                        <strong>نکات ارسال:</strong>
-                        <ul style="padding-left:18px; margin-top:8px; color:var(--muted)">
-                            <li>رزومه را به صورت PDF و حداکثر تا ۵ مگابایت ارسال کنید.</li>
-                            <li>در صورت داشتن پورتفولیو آنلاین، لینک را وارد کنید.</li>
-                            <li>در عنوان پیام، موقعیت شغلی را قید کنید.</li>
-                        </ul>
-                    </div>
+                    <h4 style="color:var(--gold);font-size:28px;margin-bottom:24px">تماس سریع</h4>
+                    <p style="color:#ccc;line-height:2.2;font-size:18px">
+                        تلفن: <strong style="color:var(--gold)">021 - 744 95</strong><br>
+                        موبایل: <strong style="color:var(--gold)">0902-007-5495</strong><br>
+                        ایمیل: <strong style="color:var(--gold)">info@xino.ir</strong>
+                    </p>
+                    <hr style="border-color:rgba(212,175,55,0.3);margin:40px 0">
+                    <h5 style="color:var(--gold)">چرا ژینوسازه؟</h5>
+                    <ul style="color:#aaa;line-height:2.1;font-size:16px">
+                        <li>بیش از ۱۵ سال تجربه در غرفه‌سازی</li>
+                        <li>طراحی 3D و رندر حرفه‌ای رایگان</li>
+                        <li>اجرا در تمام نمایشگاه‌های ایران</li>
+                        <li>تضمین بهترین قیمت و کیفیت</li>
+                    </ul>
                 </aside>
             </div>
         </div>
     </div>
 
-    <!-- POPUP: Contact (Consultation) -->
-    <div id="contactBackdrop" class="popup-backdrop" aria-hidden="true">
-        <div class="popup" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-            <button class="close-x" aria-label="بستن" data-close>&times;</button>
-            <div class="popup-grid">
-                <div>
-                    <h3 id="contactTitle" style="color:var(--accent)">درخواست مشاوره / استعلام</h3>
-                    <p class="lead">
-                        شرکت ما به‌عنوان مجموعه‌ای تخصصی در حوزه طراحی داخلی و غرفه‌سازی حرفه‌ای، آماده همراهی با شما در تمامی مراحل — از ایده‌پردازی تا اجرا — می‌باشد.
-                        برای دریافت مشاوره تخصصی، طرح اولیه، یا هماهنگی بازدید کارشناسی، فرم زیر را تکمیل کنید. کارشناسان ما در کوتاه‌ترین زمان با شما تماس خواهند گرفت.
-                    </p>
-
-                    <!-- Consultation fields -->
-                    <form id="contactForm" novalidate>
-                        <div class="field">
-                            <label class="field-label">نام و نام خانوادگی</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM21 21a8 8 0 0 0-18 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="cFullName" name="FullName" type="text" placeholder="نام و نام خانوادگی" required />
-                            </div>
-                            <div class="field-error">نام لازم است.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">سمت / نقش</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
-                                <input id="cRole" name="Role" type="text" placeholder="سمت یا نقش شما" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">شماره تماس</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="cPhone" name="PhoneNumber" type="text" placeholder="09xx..." required />
-                            </div>
-                            <div class="field-error">شماره تماس معتبر نیست.</div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">ایمیل</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="cEmail" name="Email" type="email" placeholder="name@example.com" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">عنوان نمایشگاه</label>
-                            <div class="input-wrap">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 14l11-11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                <input id="cExhibition" name="Exhibition" type="text" placeholder="نام نمایشگاه مرتبط" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">آدرس نمایشگاه</label>
-                            <div class="input-wrap">
-                                <input id="cAddress" name="AddressExhibition" type="text" placeholder="آدرس محل برگزاری" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">نام شرکت</label>
-                            <div class="input-wrap">
-                                <input id="cCompany" name="Company" type="text" placeholder="نام شرکت (در صورت وجود)" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">تاریخ برگزاری نمایشگاه (در صورت مشخص)</label>
-                            <div class="input-wrap">
-                                <input id="cDate" name="DateExhibition" type="date" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">متراژ مورد نیاز (متر مربع)</label>
-                            <div class="input-wrap">
-                                <input id="cMeterage" name="Meterage" type="text" placeholder="مثال: 36" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">تاریخ موردنظر برای ساخت</label>
-                            <div class="input-wrap">
-                                <input id="cBuildDate" name="BuildDate" type="date" />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="field-label">توضیحات نمایشگاه / درخواست</label>
-                            <textarea id="cText" name="TextExhibition" placeholder="توضیحات تکمیلی در مورد نیازها، اهداف یا خواسته‌های ویژه"></textarea>
-                        </div>
-
-                        <div style="display:flex; gap:12px; align-items:center; margin-top:8px">
-                            <label style="display:flex; gap:8px; align-items:center"><input type="checkbox" name="IsChacket"> تأیید صحت اطلاعات و موافقت با پیگیری تماس</label>
-                        </div>
-
-                        <div class="submit-row">
-                            <button type="button" class="btn-cancel" data-close>انصراف</button>
-                            <button type="submit" class="btn-submit">ارسال درخواست</button>
-                        </div>
-                    </form>
-                </div>
-
-                <aside class="popup-side">
-                    <h4 style="color:var(--accent)">تماس سریع</h4>
-                    <div class="small-muted">
-                        تلفن: <strong>021-91001234</strong><br>
-                        موبایل: <strong>0902-007-5495</strong><br>
-                        ایمیل: <strong>info@company.com</strong>
-                        <div style="height:8px"></div>
-                        ساعات پاسخگویی: ۹ الی ۱۸ (شنبه تا چهارشنبه)
-                    </div>
-                    <hr style="border-color:rgba(255,255,255,0.04); margin-top:10px">
-                    <div class="small-muted" style="margin-top:8px">
-                        لطفاً در صورت تمایل، متراژ، تاریخ نمایشگاه و هر توضیحی که به تصمیم‌گیری ما کمک می‌کند را وارد کنید تا پاسخ دقیق‌تری دریافت کنید.
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </div>
-
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        // utilities
-        const qs = s => document.querySelector(s);
-        const qsa = s => Array.from(document.querySelectorAll(s));
+        // منوی کناری
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+        const closeMenu = document.getElementById('closeMenu');
 
-        // hookup: set BuildDate hidden values to today
-        const isoToday = new Date().toISOString().slice(0,10);
-        qsa('input[name="BuildDate"]').forEach(i => i.value = isoToday);
+        menuBtn.onclick = () => {
+            sideMenu.classList.add('open');
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        };
+        const closeMenuFunc = () => {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        };
+        closeMenu.onclick = overlay.onclick = closeMenuFunc;
 
-        // open/close (also toggle modal-open class to prevent underlying hover/conflict)
-        const jobsBackdrop = qs('#jobsBackdrop');
-        const contactBackdrop = qs('#contactBackdrop');
-        function openModal(backdrop){ backdrop.classList.add('show'); backdrop.querySelector('.popup').classList.add('show'); backdrop.setAttribute('aria-hidden','false'); document.body.classList.add('modal-open'); document.body.style.overflow='hidden'; }
-        function closeModal(backdrop){ backdrop.classList.remove('show'); backdrop.querySelector('.popup').classList.remove('show'); backdrop.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); document.body.style.overflow=''; }
-
-        qs('#openJobs').addEventListener('click', ()=> openModal(jobsBackdrop));
-        qs('#openContact').addEventListener('click', ()=> openModal(contactBackdrop));
-
-        qsa('[data-close]').forEach(btn=>btn.addEventListener('click', e=>{
-          const backdrop = e.target.closest('.popup-backdrop');
-          if(backdrop) closeModal(backdrop);
-        }));
-
-        qsa('.popup-backdrop').forEach(b=> b.addEventListener('click', (e)=> {
-          if(e.target === b) closeModal(b);
-        }));
-
-        // file input (jobs)
-        const fileInput = qs('#cvfile');
-        const fileName = qs('#fileName');
-        const fileError = qs('#fileError');
-        qsa('.fakebtn').forEach(btn=> btn.addEventListener('click', ()=> fileInput.click()));
-        if(fileInput) fileInput.addEventListener('change', ()=>{
-          if(fileInput.files && fileInput.files.length>0){
-            const f = fileInput.files[0];
-            fileName.textContent = f.name;
-            if(f.type !== 'application/pdf' || f.size > 5*1024*1024){
-              fileError.style.display='block';
-            } else { fileError.style.display='none'; }
-          } else {
-            fileName.textContent='فایلی انتخاب نشده است';
-            fileError.style.display='none';
-          }
+        // زیرمنو
+        document.querySelectorAll('.sub-toggle').forEach(btn => {
+            btn.onclick = () => {
+                const sub = document.getElementById(btn.dataset.target);
+                sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+            };
         });
 
-        // validation helpers
-        function markInvalid(el, msg){
-          const field = el.closest('.field') || el.closest('div.field');
-          if(!field) return;
-          field.classList.add('invalid');
-          const err = field.querySelector('.field-error');
-          if(err){ err.textContent = msg || err.textContent; err.style.display = 'block'; }
-        }
-        function clearValidation(formId){
-          qsa('#'+formId+' .field').forEach(f=>{ f.classList.remove('invalid'); const err = f.querySelector('.field-error'); if(err) err.style.display='none'; });
-        }
-
-        // phone regex (iran-ish simple) - accepts 09xxxxxxxxx or +989xxxxxxxxx or landlines starting with 0
-        const phoneRe = /^(\+?98|0)?9\d{9}$|^0?2\d{8,9}$/;
-
-        // helper to collect form data as object (for debug or AJAX)
-        function formToObject(form){
-          const fd = new FormData(form);
-          const obj = {};
-          for(const [k,v] of fd.entries()){
-            if(obj[k] !== undefined){
-              if(!Array.isArray(obj[k])) obj[k] = [obj[k]];
-              obj[k].push(v);
-            } else obj[k] = v;
-          }
-          return obj;
-        }
-
-        // jobs form submit (CurriculumVitae)
-        qs('#jobsForm').addEventListener('submit', e=>{
-          e.preventDefault();
-          const form = e.target;
-          clearValidation('jobsForm');
-          let ok = true;
-
-          const fullname = qs('#fullname');
-          const jobPosition = qs('#jobPosition');
-          const phone = qs('#phone');
-          // required checks
-          if(!fullname.value.trim()){ markInvalid(fullname); ok=false; }
-          if(!jobPosition.value){ markInvalid(jobPosition); ok=false; }
-          if(!phone.value.trim() || !phoneRe.test(phone.value.replace(/\s+/g,''))){ markInvalid(phone, 'لطفاً شماره تماس معتبر وارد کنید.'); ok=false; }
-
-          // file check
-          if(fileInput && fileInput.files && fileInput.files.length>0){
-            const f = fileInput.files[0];
-            if(f.type !== 'application/pdf' || f.size > 5*1024*1024){
-              fileError.style.display='block';
-              markInvalid(fileInput);
-              ok=false;
-            }
-          }
-
-          if(!ok) return;
-
-          // demo success
-          alert('اطلاعات شما با موفقیت ثبت شد. کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت.');
-          qsa('[data-close]').forEach(btn=>btn.click());
-          form.reset();
-          fileName.textContent='فایلی انتخاب نشده است';
+        // باز شدن خودکار پاپ‌آپ
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('contactBackdrop').classList.add('show');
         });
 
-        // contact form submit (Consultation)
-        qs('#contactForm').addEventListener('submit', e=>{
-          e.preventDefault();
-          const form = e.target;
-          clearValidation('contactForm');
-          let ok = true;
-          const fullName = qs('#cFullName');
-          const phone = qs('#cPhone');
-
-          if(!fullName.value.trim()){ markInvalid(fullName); ok=false; }
-          if(!phone.value.trim() || !phoneRe.test(phone.value.replace(/\s+/g,''))){ markInvalid(phone, 'لطفاً شماره تماس معتبر وارد کنید.'); ok=false; }
-
-          if(!ok) return;
-
-          // demo submit
-          alert('درخواست شما ثبت شد. کارشناسان ما در کوتاه‌ترین زمان با شما تماس خواهند گرفت.');
-          qsa('[data-close]').forEach(btn=>btn.click());
-          form.reset();
+        // بستن پاپ‌آپ
+        document.querySelectorAll('[data-close]').forEach(btn => {
+            btn.onclick = () => {
+                document.getElementById('contactBackdrop').classList.remove('show');
+                history.back();
+            };
         });
 
+        // بعد از موفقیت → ۴ ثانیه بعد برو خانه
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    setTimeout(() => { window.location.href = "/"; }, 4000);
+            </text>
+        }
     </script>
 </body>
 </html>
