@@ -18,6 +18,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ConsultationService>();
 builder.Services.AddScoped<CurriculumVitaeService>();
 builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<BlugService>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

@@ -21,12 +21,13 @@ namespace xino.SERVICE.Services;
 
     }
 
-    public async Task UpdateAysnc(Admin admin)
+    public async Task<int> UpdateAysnc(Admin admin)
     {
         _context.Admins.Update(admin);
 
         await _context.SaveChangesAsync();
 
+        return admin.Id;
 
 
 
