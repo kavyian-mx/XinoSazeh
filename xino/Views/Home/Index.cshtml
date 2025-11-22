@@ -1,8 +1,184 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+   
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ژینوسازه — طراحی و اجرای غرفه نمایشگاهی</title>
+    <meta name="description" content="طراحی و اجرای غرفه‌های نمایشگاهی لوکس با تمرکز بر تجربه برندینگ و معماری موقت." />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/Style/styleindex.css">
+
+</head>
+<body>
+
+    <!-- دکمه منو -->
+    <button id="menuBtn" aria-label="باز کردن منو">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <!-- منوی کناری -->
+    <aside id="sideMenu">
+        <div class="menu-header">
+            <div class="menu-logo">ژینوسازه</div>
+            <button id="closeMenu" aria-label="بستن">×</button>
+        </div>
+        <nav>
+            <a href="#" class="menu-item">خانه</a>
+
+            <div class="menu-item sub-toggle" data-target="services">
+                خدمات
+                <svg width="20" height="20" style="margin-right:auto; transform:rotate(180deg)">
+                    <path d="M8 6l4 6-4 6" stroke="currentColor" fill="none" stroke-width="2.2" />
+                </svg>
+            </div>
+            <div class="submenu" id="services">
+                <a href="#">طراحی غرفه نمایشگاهی</a>
+                <a href="#">اجرای غرفه و نصب</a>
+                <a href="#">مشاوره و برندینگ</a>
+                <a href="#">غرفه‌های مدولار</a>
+            </div>
+
+            <a href="#projects" class="menu-item">نمونه‌کارها</a>
+            <a href="#" class="menu-item">پروژه‌های اخیر</a>
+            <a href="#" class="menu-item">درباره ما</a>
+            <a href="#" class="menu-item">تماس با ما</a>
+
+            <div style="margin-top:70px;padding:32px;background:rgba(212,175,55,0.1);border-radius:22px;border:1px solid rgba(212,175,55,0.3);text-align:center">
+                <p style="color:var(--gold);font-size:19px;font-weight:700;margin-bottom:16px">تماس سریع</p>
+                <a href="tel:+982174495" style="color:#fff;font-size:26px;font-weight:900">021 - 744 95</a>
+            </div>
+        </nav>
+    </aside>
+
+    <div id="overlay"></div>
+
+    <!-- هیرو -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ژینوسازه</h1>
+            <div class="hero-buttons">
+                <button class="btn-hero btn-primary">نمونه‌کارها</button>
+                <a class="btn-hero btn-outline" asp-controller="CallMe" asp-action="index">تماس با ما</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- پروژه‌ها -->
+    <section id="projects" class="container">
+        <h2 class="section-title">نمونه‌کارهای اخیر</h2>
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۱">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">نمایشگاه نفت و گاز</div>
+                            <div class="project-subtitle">غرفه شرکت ملی نفت ایران</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۲">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">اتو اکسپو تهران</div>
+                            <div class="project-subtitle">غرفه پورشه ایران</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۳">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">الکامپ ۱۴۰۳</div>
+                            <div class="project-subtitle">غرفه همراه اول</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۴">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">ایران هلث</div>
+                            <div class="project-subtitle">غرفه تجهیزات پزشکی</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۵">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">نمایشگاه معماری</div>
+                            <div class="project-subtitle">غرفه آریا سازه</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <img src="./assets/Image/bg.png" alt="پروژه ۶">
+                    <div class="project-overlay">
+                        <div>
+                            <div class="project-title">ایران فود</div>
+                            <div class="project-subtitle">غرفه صنایع غذایی بهروز</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="btn-more">مشاهده همه پروژه‌ها</a>
+    </section>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+        const closeMenu = document.getElementById('closeMenu');
+
+        function openMenu() {
+          sideMenu.classList.add('open');
+          overlay.classList.add('show');
+          menuBtn.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeMenuFunc() {
+          sideMenu.classList.remove('open');
+          overlay.classList.remove('show');
+          menuBtn.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+
+        menuBtn.onclick = openMenu;
+        closeMenu.onclick = closeMenuFunc;
+        overlay.onclick = closeMenuFunc;
+
+        document.querySelectorAll('.sub-toggle').forEach(btn => {
+          btn.onclick = () => {
+            const sub = document.getElementById(btn.dataset.target);
+            sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+          };
+        });
+    </script>
+</body>
+</html>

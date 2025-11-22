@@ -2,7 +2,7 @@
 
 namespace xino.DEL.Entity;
 
-  public  class Project
+  public  class Project:PageBaseSeo
     {
     public int Id { get; set; }
 
