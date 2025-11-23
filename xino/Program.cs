@@ -19,6 +19,7 @@ builder.Services.AddScoped<ConsultationService>();
 builder.Services.AddScoped<CurriculumVitaeService>();
 builder.Services.AddScoped<AdminService>();
 builder.Services.AddScoped<BlugService>();
+builder.Services.AddScoped<InteriorDecorationService>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
