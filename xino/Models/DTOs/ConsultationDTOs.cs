@@ -17,6 +17,7 @@ namespace ENDPOINTs.Models.DTOs
         [Display(Name = "شماره موبایل")]
         [Required(ErrorMessage = "شماره موبایل الزامی است")]
         [StringLength(12, MinimumLength = 10)]
+        [RegularExpression(@"^09\d{9}$", ErrorMessage = "فرمت شماره موبایل صحیح نیست. مثال: 09123456789")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "ایمیل")]
@@ -53,4 +54,51 @@ namespace ENDPOINTs.Models.DTOs
         [StringLength(300)]
         public string TextExhibition { get; set; }
     }
+
+    public class ConsultationlistDTO
+    {
+
+
+        public int Id { get; set; }
+
+        public string FullName { get; set; }
+
+        public string Role { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
+
+        public string Exhibition { get; set; }
+
+        public string AddressExhibition { get; set; }
+
+        public string Company { get; set; }
+
+        public DateTime DateExhibition { get; set; }
+
+        public int Meterage { get; set; }
+
+        public DateTime BuildDate { get; set; }
+
+        public string TextExhibition { get; set; }
+
+
+
+        public bool IsChacket { get; set; }
+
+
+
+    }
+
+
+    public class ConsultationIsCheck
+    {
+        public bool IsChacket { get; set; }
+
+    }
+
+
+
+
 }

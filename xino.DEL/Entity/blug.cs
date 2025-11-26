@@ -1,4 +1,4 @@
-﻿
+﻿ 
 
 namespace xino.DEL.Entity;
 
