@@ -24,6 +24,6 @@ namespace ENDPOINTs.Models.DTOs
 
     public class AdminEditDTOs : AdminCreateDTOs
     {
-
+        public bool IsSuperAdmin { get; set; }
     }
 }
