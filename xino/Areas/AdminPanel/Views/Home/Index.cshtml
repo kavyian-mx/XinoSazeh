@@ -1,8 +1,107 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "داشبورد";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <h2 class="mb-4">داشبورد پنل ادمین</h2>
+
+    <div class="row g-4">
+
+        <!-- درخواست‌های جدید -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title">درخواست‌های جدید</h5>
+                    <p class="card-text display-6">15</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/AdminPanel/Home/NoChecket" class="btn btn-light btn-sm">مشاهده</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- درخواست‌های بررسی شده -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-success h-100">
+                <div class="card-body">
+                    <h5 class="card-title">درخواست‌های بررسی شده</h5>
+                    <p class="card-text display-6">23</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/adminpanel/home/ListCheck" class="btn btn-light btn-sm">مشاهده</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- دسترسی سریع -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-warning h-100">
+                <div class="card-body">
+                    <h5 class="card-title">دسترسی سریع</h5>
+                    <p class="card-text">ایجاد محتوا، بلاگ و پروژه‌ها</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/admin/blogs/create" class="btn btn-light btn-sm">ایجاد بلاگ</a>
+                    <a href="/admin/projects/create" class="btn btn-light btn-sm">ایجاد پروژه</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- تقویم نمایشگاهی -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body">
+                    <h5 class="card-title">تقویم نمایشگاهی</h5>
+                    <p class="card-text">لیست و ایجاد فعالیت‌ها</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/admin/calendar/list" class="btn btn-light btn-sm">لیست فعالیت‌ها</a>
+                    <a href="/admin/calendar/create" class="btn btn-light btn-sm">ایجاد جدید</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- دکوراسیون داخلی -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-secondary h-100">
+                <div class="card-body">
+                    <h5 class="card-title">دکوراسیون داخلی</h5>
+                    <p class="card-text">مدیریت پروژه‌های دکور</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/admin/interior/list" class="btn btn-light btn-sm">لیست فعال</a>
+                    <a href="/admin/interior/create" class="btn btn-light btn-sm">ایجاد جدید</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- رزومه‌ها -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-dark h-100">
+                <div class="card-body">
+                    <h5 class="card-title">رزومه‌ها</h5>
+                    <p class="card-text">مشاهده و بررسی رزومه‌ها</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/admin/cv/list" class="btn btn-light btn-sm">جدید</a>
+                    <a href="/admin/cv/deleted" class="btn btn-light btn-sm">بررسی شده</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ادمین‌ها -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-danger h-100">
+                <div class="card-body">
+                    <h5 class="card-title">ادمین‌ها</h5>
+                    <p class="card-text">مدیریت کاربران پنل</p>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="/admin/admins/list" class="btn btn-light btn-sm">لیست فعال</a>
+                    <a href="/admin/admins/create" class="btn btn-light btn-sm">ایجاد جدید</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

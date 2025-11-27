@@ -21,9 +21,4 @@
     <ProjectReference Include="..\xino.SERVICE\xino.SERVICE.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\AdminPanel\Data\" />
-    <Folder Include="Areas\AdminPanel\Models\" />
-  </ItemGroup>
-
 </Project>

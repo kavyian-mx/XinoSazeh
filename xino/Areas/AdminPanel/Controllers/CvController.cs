@@ -1,33 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ENDPOINTs.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
-    public class HomeController : Controller
+    public class CvController : Controller
     {
-        public async Task<IActionResult>  Index()
-        {
-            return View();
-        }
-
-
+        [HttpGet]
         public async Task<IActionResult> ListCheck()
         {
-
-
             return View();
         }
-
-
+        [HttpGet]
         public async Task<IActionResult> NotChecket()
         {
 
 
             return View();
         }
+
     }
-
-  
-
 }
