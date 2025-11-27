@@ -1,0 +1,60 @@
+﻿@model ENDPOINTs.Models.DTOs.ProjectListDTOs
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- تصویر هدر -->
+        <div class="col-12 mb-4">
+            <img src="@Model.HeaderImage"
+                 class="img-fluid rounded shadow"
+                 style="width:100%; max-height:450px; object-fit:cover;" />
+        </div>
+
+        <!-- اطلاعات اصلی -->
+        <div class="col-md-8">
+
+            <h2 class="fw-bold mb-3">@Model.Title</h2>
+
+            <p><strong>شناسه:</strong> @Model.Id</p>
+            <p><strong>Slug:</strong> @Model.Slug</p>
+            <p><strong>متراژ:</strong> @Model.ProjectSize</p>
+            <p><strong>سال پروژه:</strong> @Model.YearProject</p>
+            <p><strong>سبک:</strong> @Model.StyleProject</p>
+            <p><strong>نمایشگاه:</strong> @Model.ExhibitionProject</p>
+
+        </div>
+
+        <!-- گالری -->
+        <div class="col-12 mt-5">
+            <h4 class="mb-3">گالری تصاویر</h4>
+
+            <div class="row g-3">
+
+                @if (Model.GalleryImageProject != null && Model.GalleryImageProject.Any())
+                {
+                    foreach (var img in Model.GalleryImageProject)
+                    {
+                                <div class="col-md-3">
+                                    <img src="@img.ImageUrl"
+                                         class="img-fluid rounded shadow-sm"
+                                         style="height:180px; object-fit:cover;" />
+                                </div>
+                    }
+                }
+                else
+                {
+                        <p class="text-muted">تصویری برای این پروژه ثبت نشده است.</p>
+                }
+
+            </div>
+        </div>
+
+        <!-- دکمه بازگشت -->
+        <div class="col-12 mt-5 text-center">
+            <a asp-action="Index" class="btn btn-secondary px-4">بازگشت</a>
+        </div>
+
+    </div>
+
+</div>

@@ -1,82 +1,95 @@
-﻿
+﻿@model ENDPOINTs.Models.DTOs.ProjectCreateDTOs
+
 <div class="container mt-5">
     <h2 class="mb-4">ایجاد پروژه جدید</h2>
 
-    <form>
+    <form asp-action="Create" asp-controller="Project" method="post" enctype="multipart/form-data">
         <div class="row g-3">
 
             <!-- عنوان پروژه -->
             <div class="col-md-6">
-                <label class="form-label">عنوان پروژه</label>
-                <input type="text" class="form-control" placeholder="مثلاً طراحی داخلی شرکت X">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <!-- Slug -->
             <div class="col-md-6">
-                <label class="form-label">Slug</label>
-                <input type="text" class="form-control" placeholder="مثلاً design-company-x">
+                <label asp-for="Slug" class="form-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
             </div>
 
             <!-- تصویر هدر -->
             <div class="col-md-6">
-                <label class="form-label">تصویر هدر</label>
-                <input type="file" class="form-control">
+                <label asp-for="HeaderImageFile" class="form-label"></label>
+                <input asp-for="HeaderImageFile" class="form-control" type="file" />
+                <span asp-validation-for="HeaderImageFile" class="text-danger"></span>
             </div>
 
             <!-- متراژ پروژه -->
             <div class="col-md-6">
-                <label class="form-label">متراژ پروژه</label>
-                <input type="text" class="form-control" placeholder="مثلاً 120 متر">
+                <label asp-for="ProjectSize" class="form-label"></label>
+                <input asp-for="ProjectSize" class="form-control" />
+                <span asp-validation-for="ProjectSize" class="text-danger"></span>
             </div>
 
             <!-- سال پروژه -->
             <div class="col-md-4">
-                <label class="form-label">سال پروژه</label>
-                <input type="number" class="form-control" placeholder="مثلاً 1403">
+                <label asp-for="YearProject" class="form-label"></label>
+                <input asp-for="YearProject" class="form-control" />
+                <span asp-validation-for="YearProject" class="text-danger"></span>
             </div>
 
             <!-- سبک پروژه -->
             <div class="col-md-4">
-                <label class="form-label">سبک پروژه</label>
-                <input type="text" class="form-control" placeholder="مثلاً مدرن">
+                <label asp-for="StyleProject" class="form-label"></label>
+                <input asp-for="StyleProject" class="form-control" />
+                <span asp-validation-for="StyleProject" class="text-danger"></span>
             </div>
 
             <!-- نمایشگاه مرتبط -->
             <div class="col-md-4">
-                <label class="form-label">نمایشگاه مرتبط</label>
-                <input type="text" class="form-control" placeholder="مثلاً نمایشگاه خودرو">
+                <label asp-for="ExhibitionProject" class="form-label"></label>
+                <input asp-for="ExhibitionProject" class="form-control" />
+                <span asp-validation-for="ExhibitionProject" class="text-danger"></span>
             </div>
 
             <!-- گالری تصاویر -->
             <div class="col-12">
-                <label class="form-label">گالری تصاویر</label>
-                <input type="file" class="form-control" multiple>
+                <label asp-for="GalleryImagesFiles" class="form-label"></label>
+                <input asp-for="GalleryImagesFiles" class="form-control" type="file" multiple />
+                <span asp-validation-for="GalleryImagesFiles" class="text-danger"></span>
             </div>
 
-            <!-- SEO و Meta -->
+            <!-- نوع صفحه -->
             <div class="col-md-6">
-                <label class="form-label">نوع صفحه</label>
-                <input type="text" class="form-control" placeholder="مثلاً پروژه دکوراسیون">
+                <label asp-for="PageType" class="form-label"></label>
+                <input asp-for="PageType" class="form-control" />
             </div>
 
+            <!-- عنوان متا -->
             <div class="col-md-6">
-                <label class="form-label">عنوان متا</label>
-                <input type="text" class="form-control" placeholder="حداکثر 70 کاراکتر">
+                <label asp-for="MetaTitle" class="form-label"></label>
+                <input asp-for="MetaTitle" class="form-control" />
             </div>
 
+            <!-- توضیحات متا -->
             <div class="col-md-6">
-                <label class="form-label">توضیحات متا</label>
-                <input type="text" class="form-control" placeholder="حداکثر 160 کاراکتر">
+                <label asp-for="MetaDescription" class="form-label"></label>
+                <input asp-for="MetaDescription" class="form-control" />
             </div>
 
+            <!-- کلمات کلیدی متا -->
             <div class="col-md-6">
-                <label class="form-label">کلمات کلیدی متا</label>
-                <input type="text" class="form-control" placeholder="مثلاً طراحی، دکوراسیون، داخلی">
+                <label asp-for="MetaKeywords" class="form-label"></label>
+                <input asp-for="MetaKeywords" class="form-control" />
             </div>
 
+            <!-- Canonical URL -->
             <div class="col-md-6">
-                <label class="form-label">Canonical URL</label>
-                <input type="text" class="form-control" placeholder="مثلاً /projects/design-company-x">
+                <label asp-for="CanonicalUrl" class="form-label"></label>
+                <input asp-for="CanonicalUrl" class="form-control" />
             </div>
 
         </div>
@@ -87,3 +100,4 @@
         </div>
     </form>
 </div>
+
